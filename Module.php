@@ -18,21 +18,19 @@ namespace Aurora\Modules\CoreExtender;
  */
 class Module extends \Aurora\System\Module\AbstractModule
 {
-	public function init()
-	{
-		$this->subscribeEvent('Core::SetAuthDataAndGetAuthToken::after', array($this, 'onAfterAuthenticate'), 10);
-	}
+    public function init()
+    {
+        $this->subscribeEvent('Core::SetAuthDataAndGetAuthToken::after', array($this, 'onAfterAuthenticate'), 10);
+    }
 
-	public function onAfterAuthenticate(&$aArgs, &$mResult)
-	{
-		if ($mResult && is_array($mResult) && isset($mResult['AuthToken']))
-		{
-			$sXClientHeader = (string) \MailSo\Base\Http::SingletonInstance()->GetHeader('X-Client');
+    public function onAfterAuthenticate(&$aArgs, &$mResult)
+    {
+        if ($mResult && is_array($mResult) && isset($mResult['AuthToken'])) {
+            $sXClientHeader = (string) \MailSo\Base\Http::SingletonInstance()->GetHeader('X-Client');
 
-			if (strtolower($sXClientHeader) !== 'webclient')
-			{
-				$mResult['AllowAccess'] = 1;
-			}
-		}
-	}
+            if (strtolower($sXClientHeader) !== 'webclient') {
+                $mResult['AllowAccess'] = 1;
+            }
+        }
+    }
 }
