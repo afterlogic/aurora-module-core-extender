@@ -23,6 +23,15 @@ class Module extends \Aurora\System\Module\AbstractModule
         $this->subscribeEvent('Core::SetAuthDataAndGetAuthToken::after', array($this, 'onAfterAuthenticate'), 10);
     }
 
+    /**
+     *
+     * @return Module
+     */
+    public static function Decorator()
+    {
+        return parent::Decorator();
+    }
+
     public function onAfterAuthenticate(&$aArgs, &$mResult)
     {
         if ($mResult && is_array($mResult) && isset($mResult['AuthToken'])) {
