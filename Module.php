@@ -32,6 +32,15 @@ class Module extends \Aurora\System\Module\AbstractModule
         return parent::Decorator();
     }
 
+    /**
+     *
+     * @return Settings
+     */
+    protected function GetModuleSettings()
+    {
+        return $this->oModuleSettings;
+    }
+
     public function onAfterAuthenticate(&$aArgs, &$mResult)
     {
         if ($mResult && is_array($mResult) && isset($mResult['AuthToken'])) {
